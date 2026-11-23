@@ -1,0 +1,17 @@
+import React,{useState} from 'react';
+import {ArrowRight,Camera,Check,Layers3,MapPin,Users,ArrowUpRight} from 'lucide-react';
+import CinemaScene from './Scene.jsx';
+import shotData from './camera-shots.json';
+import {VENUES,derivePlan,formatMoney} from './model.js';
+import './shots.css';
+
+export default function ShotStudio({plan,onPlan,onProposal,onPreview}){
+ const[chosen,setChosen]=useState('reveal'),[showReference,setShowReference]=useState(false);
+ const shot=shotData.shots.find(s=>s.id===chosen),venue=VENUES.find(v=>v.id===plan.venue),derived=derivePlan(plan);
+ return <section className="shot-studio" aria-label="Presentation views">
+  <header className="shots-heading"><div><p className="eyebrow">AFTERLIGHT / THE SAME PLAN, A NEW PERSPECTIVE</p><h1>Look at the whole evening<span>.</span></h1><p>Move from arrival to the audience. Every view follows your saved screening.</p></div><div className="shots-actions"><button className="button light" onClick={onPreview}>Create preview<Camera size={17}/></button><button className="button dark" onClick={onProposal}>Open proposal<ArrowUpRight size={17}/></button></div></header>
+  <div className="shot-layout"><div className="shot-screen"><CinemaScene plan={plan} shot={shot} cameraMode={chosen==='layout'?'plan':'shot'} showControls={false}/><div className="shot-caption"><span><Camera size={16}/>{shot.label}</span><p>{shot.description}</p></div><span className="shot-plan-tag"><MapPin size={14}/>{venue.name}</span></div><aside className="shot-list"><p className="eyebrow">CHOOSE YOUR VIEW</p>{shotData.shots.map((s,i)=><button key={s.id} aria-pressed={chosen===s.id} className={chosen===s.id?'active':''} onClick={()=>setChosen(s.id)}><span className="shot-number">{String(i+1).padStart(2,'0')}</span><span><strong>{s.label}</strong><small>{s.description}</small></span>{chosen===s.id?<Check size={17}/>:<ArrowRight size={17}/>}</button>)}<div className="shot-plan-summary"><span><Users size={16}/>{plan.guests} guests</span><span><Layers3 size={16}/>{plan.screen==='large'?'8m':'5m'} screen</span><strong>{formatMoney(derived.total)} <small>sample CAD</small></strong><button className="text-button" onClick={onPlan}>Adjust the screening<ArrowRight size={16}/></button></div></aside></div>
+  <div className="shot-note"><span>View changes never edit your plan.</span><span>{derived.ready?'Planning checks pass. Review the current revision before handover.':derived.conflicts.length+' planning '+(derived.conflicts.length===1?'issue needs':'issues need')+' attention in the workspace.'}</span></div>
+  <details className="shot-reference" open={showReference} onToggle={e=>setShowReference(e.currentTarget.open)}><summary>See the staging study behind these views</summary><div className="reference-study"><div><p className="eyebrow">TOPVIEW / STAGING REFERENCE</p><h2>Framing before finishing.</h2><p>A simplified courtyard study helped establish the five camera positions. These images are reference geometry, not the current venue or a measured site survey. The live view above uses your current saved plan.</p><p>Seating banks represent rows; the finished app renders individual chairs. Guest and equipment shots deliberately exclude parts of the venue outside their focus.</p></div><figure><img key={shot.id} src={shot.reference} alt={'Topview primitive staging reference for '+shot.label.toLowerCase()} loading="lazy" width="640" height="360"/><figcaption>{shot.label} · Topview camera study</figcaption></figure></div></details>
+ </section>
+}

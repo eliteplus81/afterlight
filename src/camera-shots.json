@@ -1,0 +1,97 @@
+{
+  "source": "Topview CLI 0.1.8",
+  "sceneSequence": 100,
+  "originYOffset": 0.12,
+  "shots": [
+    {
+      "id": "arrival",
+      "label": "Arrival",
+      "description": "Enter along the central aisle.",
+      "position": [
+        0,
+        2.1,
+        18
+      ],
+      "target": [
+        0,
+        3.0,
+        -7
+      ],
+      "fov": 45,
+      "topviewNodeId": "arrival",
+      "reference": "/assets/topview/arrival.png"
+    },
+    {
+      "id": "reveal",
+      "label": "The reveal",
+      "description": "The entire setting, from above.",
+      "position": [
+        22,
+        22.0,
+        27
+      ],
+      "target": [
+        0,
+        1.8,
+        -0.5
+      ],
+      "fov": 37,
+      "topviewNodeId": "cam-main",
+      "reference": "/assets/topview/reveal.png"
+    },
+    {
+      "id": "guest",
+      "label": "Guest view",
+      "description": "See the screen from the audience.",
+      "position": [
+        0,
+        2.0,
+        7.8
+      ],
+      "target": [
+        0,
+        3.6,
+        -7
+      ],
+      "fov": 45,
+      "topviewNodeId": "guest",
+      "reference": "/assets/topview/guest.png"
+    },
+    {
+      "id": "equipment",
+      "label": "The setup",
+      "description": "Look toward the projector and seating.",
+      "position": [
+        9,
+        7.0,
+        13
+      ],
+      "target": [
+        0,
+        1.4,
+        4
+      ],
+      "fov": 45,
+      "topviewNodeId": "equipment",
+      "reference": "/assets/topview/equipment.png"
+    },
+    {
+      "id": "layout",
+      "label": "The layout",
+      "description": "Inspect the arrangement from overhead.",
+      "position": [
+        0,
+        32.0,
+        0.01
+      ],
+      "target": [
+        0,
+        0.0,
+        0
+      ],
+      "fov": 50,
+      "topviewNodeId": "layout-overview",
+      "reference": "/assets/topview/layout.png"
+    }
+  ]
+}
