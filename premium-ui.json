@@ -1,0 +1,26 @@
+{
+  "profile": "product-admin",
+  "sourceRoots": [
+    "src"
+  ],
+  "locale": "en-CA",
+  "canonicalMap": "UX-CONTRACT.md",
+  "requiredCapabilities": [
+    "Date",
+    "Form",
+    "Scrollbar",
+    "Toast",
+    "CRUD"
+  ],
+  "ownership": {
+    "Date": "native"
+  },
+  "requiredCommands": [
+    "unit",
+    "build"
+  ],
+  "commands": {
+    "unit": "npm run test",
+    "build": "npm run build"
+  }
+}
